@@ -1,0 +1,35 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+afterEvaluate { project ->
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = "com.linecorp"
+                artifactId = "brushkit"
+                version = libs.versions.versionname.get().toString()
+
+                pom {
+                    name = "BrushKit"
+                    description = 'A flexible and customizable brush drawing toolkit for Android'
+                    url = 'https://github.com/line/BrushKit'
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                }
+            }
+        }
+
+        repositories {
+            maven {
+                // TODO: Add remote repository configuration
+                url = rootProject.layout.getBuildDirectory().dir('repo')
+            }
+        }
+    }
+}

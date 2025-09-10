@@ -1,0 +1,12 @@
+apply plugin: 'org.jlleitschuh.gradle.ktlint'
+
+ktlint {
+    android = true
+    ignoreFailures = false
+    outputToConsole = true
+    outputColorName = "RED"
+    reporters {
+        reporter "checkstyle"
+        reporter "sarif"
+    }
+}
